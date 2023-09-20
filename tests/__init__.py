@@ -2,7 +2,7 @@
 """Tests for the AirBnB clone modules."""
 import os
 from typing import TextIO
-from models.engine.file_storage import FilseStorage
+from models.engine.file_storage import FileStorage
 
 
 def clear_stream(stream: TextIO):
