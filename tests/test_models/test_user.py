@@ -2,7 +2,7 @@
 """Tests the class test_User"""
 from tests.test_models.test_base_model import test_basemodel
 from models.user import User
-
+import os
 
 class test_User(test_basemodel):
     """Test class for user model"""

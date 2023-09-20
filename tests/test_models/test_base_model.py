@@ -85,19 +85,19 @@ class test_basemodel(unittest.TestCase):
         i = self.value()
         n = i.to_dict()
         self.assertEqual(i.to_dict(), n)
-        self.assertIsInstance(self.value().to_dct(), dict)
-        self.assertIn('id', self.value().to_dct())
-        self.assertIn('created_at', self.value().to_dct())
-        self.asertIn('updated_at', self.value().to_dct())
+        self.assertIsInstance(self.value().to_dict(), dict)
+        self.assertIn('id', self.value().to_dict())
+        self.assertIn('created_at', self.value().to_dict())
+        self.assertIn('updated_at', self.value().to_dict())
         mdl = self.value()
         mdl.firstname = 'Celestine'
         mdl.lastname = 'Akpanoko'
-        self.assertIn('firstname', mdl.to_dct())
-        self.assertIn('lastname', mdl.to_dct())
-        self.assertIn('firstname', self.value(firstname='Celestine').to_dct())
-        self.assertIn('lastname', self.value(lastname='Akpanoko').to_dct())
-        self.assertIsInstance(self.value().to.dct()['created_at'], str)
-        self.assertIsInstance(self.value().to.dct()['updated_at'], str)
+        self.assertIn('firstname', mdl.to_dict())
+        self.assertIn('lastname', mdl.to_dict())
+        self.assertIn('firstname', self.value(firstname='Celestine').to_dict())
+        self.assertIn('lastname', self.value(lastname='Akpanoko').to_dict())
+        self.assertIsInstance(self.value().to_dict()['created_at'], str)
+        self.assertIsInstance(self.value().to_dict()['updated_at'], str)
         datetime_now = datetime.today()
         mdl = self.value()
         mdl.id = '012345'
@@ -111,7 +111,7 @@ class test_basemodel(unittest.TestCase):
         self.assertDictEqual(mdl.to_dict(), to_dict)
         if os.getenv('HBNB_TYPE_STORAGE') != 'db':
             self.assertDictEqual(
-                self.value(id='u-b34', age=13).to_dct(),
+                self.value(id='u-b34', age=13).to_dict(),
                 {
                     '__class__': mdl.__class__.__name__,
                     'id': 'u-b34',
@@ -119,7 +119,7 @@ class test_basemodel(unittest.TestCase):
                 }
             )
             self.assertDictEqual(
-                self.value(id='u-b34', age=None).to_dct(),
+                self.value(id='u-b34', age=None).to_dict(),
                 {
                     '__class__': mdl.__class__.__name__,
                     'id': 'u-b34',

@@ -44,7 +44,7 @@ class TestDBStorage(unittest.TestCase):
     def test_new(self):
         """New object is correctly added to database"""
         new = User(
-            email='john2020@gmail.com'
+            email='john2020@gmail.com',
             password='password',
             first_name='John',
             last_name='Zoldyck'
