@@ -7,16 +7,13 @@ from uuid import UUID
 import json
 import os
 
-
 @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
                  'basemodel test not supported')
 class test_basemodel(unittest.TestCase):
     """Test class for the base_model class"""
 
     def __init__(self, *args, **kwargs):
-        """
-        Instance method for the test class BaseModel
-        """
+        """Instance method for the test class BaseModel"""
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
@@ -33,8 +30,7 @@ class test_basemodel(unittest.TestCase):
             pass
 
     def test_init(self):
-        """
-        Tests the initialization of the model class.
+        """Tests the initialization of the model class.
         """
         self.assertIsInstance(self.value(), BaseModel)
         if self.value is not BaseModel:
@@ -55,10 +51,7 @@ class test_basemodel(unittest.TestCase):
         self.assertFalse(new is i)
 
     def test_kwargs_int(self):
-        """
-        Testing with kwargs again
-        but with int kwargs
-        """
+        """Testing with kwargs again but with int kwargs"""
         i = self.value()
         copy = i.to_dict()
         copy.update({1: 2})
@@ -85,10 +78,13 @@ class test_basemodel(unittest.TestCase):
         i = self.value()
         n = i.to_dict()
         self.assertEqual(i.to_dict(), n)
+        # Tests if it's a dictionary
         self.assertIsInstance(self.value().to_dict(), dict)
+        # Tests if to_dict contains accurate keys
         self.assertIn('id', self.value().to_dict())
         self.assertIn('created_at', self.value().to_dict())
         self.assertIn('updated_at', self.value().to_dict())
+        # Tests if to_dict contains added attributes
         mdl = self.value()
         mdl.firstname = 'Celestine'
         mdl.lastname = 'Akpanoko'
@@ -96,8 +92,10 @@ class test_basemodel(unittest.TestCase):
         self.assertIn('lastname', mdl.to_dict())
         self.assertIn('firstname', self.value(firstname='Celestine').to_dict())
         self.assertIn('lastname', self.value(lastname='Akpanoko').to_dict())
+        # Tests to_dict datetime attributes if they are strings
         self.assertIsInstance(self.value().to_dict()['created_at'], str)
         self.assertIsInstance(self.value().to_dict()['updated_at'], str)
+        # Tests to_dict output
         datetime_now = datetime.today()
         mdl = self.value()
         mdl.id = '012345'
@@ -126,6 +124,7 @@ class test_basemodel(unittest.TestCase):
                     'age': None
                 }
             )
+        # Tests to_dict output contradiction
         mdl_d = self.value()
         self.assertIn('__class__', self.value().to_dict())
         self.assertNotIn('__class__', self.value().__dict__)
@@ -134,6 +133,7 @@ class test_basemodel(unittest.TestCase):
             mdl_d.to_dict()['__class__'],
             mdl_d.__class__
         )
+        # Tests to_dict with arg
         with self.assertRaises(TypeError):
             self.value().to_dict(None)
         with self.assertRaises(TypeError):
